@@ -1,66 +1,68 @@
 import 'package:flutter/material.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
-Widget suggestionsItem() {
+
+Widget suggestionsItem(BuildContext context ,
+    { required numberOfChapters,required  name,required image, required VoidCallback onTap}) {
   return InkWell(
-    onTap: () {
-      print('taped');
-    },
+    onTap: onTap,
     child: Row(
       children: [
         Card(
           shadowColor: Colors.red,
-          margin: const EdgeInsets.only( bottom: 5, right: 5, left: 10),
-          color: Colors.grey[900],
-          elevation: 10,
+          margin:  EdgeInsets.only( bottom: 10.sp, right: 10.sp, left: 10.sp,top: 10.sp),
+          color: Colors.black,
+          elevation: 10.sp,
           child: Container(
-            width: 320,
-            height: 165,
+            width: 80.sp,
             child: Row(
               children: [
                 Image.network(
-                  "https://static.wikia.nocookie.net/bakemonogatari1645/images/c/c2/Owari_cover.jpg/revision/latest/scale-to-width-down/345?cb=20190707082059",
-                  height: 150,
-                  width: 120,
+                  image,
+                  height: 60.sp,
+                  width: 47.sp,
                   alignment: Alignment.center,
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 8.0, top: 10),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
-                      Text(
-                        "Name of anime",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16),
-                      ),
-                      Text(
-                        "recommended",
-                        style: TextStyle(
-                            color: Colors.red,
-                            fontWeight: FontWeight.w500,
-                            fontSize: 15),
-                      ),
-                      SizedBox(
-                        height: 65,
-                      ),
-                      Text(
-                        "Name of writer",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w500,
-                            fontSize: 15),
-                      ),
-                      Text(
-                        "Number of Chapter",
-                        maxLines: 1,
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w500,
-                            fontSize: 15),
-                      ),
-                    ],
+                Expanded(
+                  child: Padding(
+                    padding:  EdgeInsets.only(left: 10.sp, top: 12.sp),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children:  [
+                        Text(
+                          name,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style:  TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20.sp),
+                        ),
+                        Text(
+                          "recommended",
+                          style: TextStyle(
+                              color: Colors.red,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 18.sp),
+                        ),
+                         SizedBox(height: 38.sp,),
+                         Text(
+                          "Name of writer",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 18.sp),
+                        ),
+                        Text(
+                          numberOfChapters,
+                          maxLines: 1,
+                          style:  TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 16.sp),
+                        ),
+                      ],
+                    ),
                   ),
                 )
               ],
@@ -77,8 +79,7 @@ Widget animeItem(BuildContext context ,
   return InkWell(
     onTap: onTap,
     child: Padding(
-      padding: const EdgeInsets.only(
-          top: 10, bottom: 10, right: 2, left: 2),
+      padding:  EdgeInsets.only(top: 10.sp, bottom: 10.sp, right: 5.sp, left: 5.sp),
       child: Card(
         shadowColor: Colors.red,
         shape: RoundedRectangleBorder(
@@ -86,11 +87,10 @@ Widget animeItem(BuildContext context ,
         color: Colors.white,
         elevation: 10,
         child: Container(
-          width: 130,
-          height: 235,
+          width: 50.sp,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
-              color: Colors.grey[900]),
+              color: Colors.black),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -101,13 +101,13 @@ Widget animeItem(BuildContext context ,
                 ),
                 child: Image.network(
                   image,
-                  width: 130,
-                  height: 160,
+                  width: 50.sp,
+                  height: 55.sp,
                   fit: BoxFit.fill,
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 5, top: 2),
+                padding:  EdgeInsets.only(left: 6.sp, top: 5.sp),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -115,30 +115,29 @@ Widget animeItem(BuildContext context ,
                       name,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                          color: Colors.white, fontSize: 15),
-                    ),
-                    const SizedBox(
-                      height: 1,
+                      style: TextStyle(
+                          color: Colors.white, fontSize: 18.sp),
                     ),
                     Text(
                       numberOfChapters,
                       style: TextStyle(
-                          color: Colors.grey[300], fontSize: 12),
+                          color: Colors.grey[300], fontSize: 15.sp),
                     ),
-                    const SizedBox(height: 10,),
+                     SizedBox(height: 10.sp,),
                     Container(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
-                        children: const [
-                          Icon(
+                        children:  [
+                           Icon(
                             Icons.star_border_outlined,
                             color: Colors.red,
+                            size: 20.sp,
                           ),
-                          SizedBox(width: 5,),
-                          Text(
+                          SizedBox(width: 5.sp,),
+                           Text(
                             "3.9",
-                            style: TextStyle(color: Colors.white),
+                            style: TextStyle(color: Colors.white,
+                            fontSize: 15.sp),
                           )
                         ],
                       ),
@@ -163,35 +162,43 @@ Widget textFormField({
   required bool obscureText,
   required TextInputType keyType,
   required TextInputAction inputAction,
+  GestureTapCallback? tap,
+   required FormFieldValidator<String>? validator
 
 }
 ){
-  return Container(
-    height: 80,
-    decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(20)
-    ),
-    child: Center(
-      child: Padding(
-        padding: const EdgeInsets.only(left:20),
-        child: TextFormField(
-          keyboardType: keyType,
-          textInputAction: inputAction,
-          obscureText: obscureText,
-          controller: controller,
-          cursorColor: Colors.red,
-          decoration: InputDecoration(
-              border: InputBorder.none,
-              hintText: hintTitle,
-              hintStyle: const TextStyle(
-                  color: Colors.grey,
-                  fontSize: 17
-              )
+  return Padding(
+    padding:  EdgeInsets.only(left:10.sp,right: 10.sp),
+    child: TextFormField(
+      keyboardType: keyType,
+      textInputAction: inputAction,
+      obscureText: obscureText,
+      controller: controller,
+      cursorColor: Colors.red,
+      decoration: InputDecoration(
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(20),
+          borderSide:const  BorderSide(
+            color: Colors.white
+          )),
+
+          contentPadding:  EdgeInsets.symmetric(vertical: 22.sp, horizontal: 10.0.sp),
+          fillColor: Colors.white,
+          filled: true,
+          hintText: hintTitle,
+          errorBorder: const OutlineInputBorder(
+            borderSide: BorderSide(
+              color: Colors.white
+            )
           ),
-        ),
+          hintStyle: TextStyle(
+              color: Colors.grey,
+              fontSize: 18.sp
+          )
       ),
+      validator: validator,
     ),
+
   );
 
 
@@ -207,14 +214,15 @@ Widget drawerComponent({
       children:  [
         Expanded(
           child: Text(title,
-            style: const TextStyle(
+            style:  TextStyle(
                 color: Colors.white,
-                fontSize: 18,
+                fontSize: 19.sp,
                 fontWeight: FontWeight.bold
             ),),
         ),
         Icon(icons,
-          color: Colors.white,)
+          color: Colors.white,
+          size: 18.sp,)
 
       ],
     ),
@@ -228,9 +236,9 @@ Widget userDataComponent({
   
 }){
   return Padding(
-    padding: const EdgeInsets.only(left: 5,right: 5,bottom: 20),
+    padding: EdgeInsets.only(left: 10.sp,right: 10.sp,bottom: 20.sp),
     child: Container(
-      height: 70,
+      height: 35.sp,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
         gradient: LinearGradient(
@@ -240,19 +248,20 @@ Widget userDataComponent({
         ),
       ),
       child: Padding(
-        padding: const EdgeInsets.only(right: 15),
+        padding:  EdgeInsets.only(right: 15.sp),
         child: Row(
           children: [
-           const  SizedBox(width: 10,),
+            SizedBox(width: 10.sp,),
             Expanded(
               child: Text(name,
-                style:const  TextStyle(
+                style: TextStyle(
                     color: Colors.white,
-                    fontSize: 17
+                    fontSize: 18.sp
                 ),),
             ),
             Icon(icon,
-              color: Colors.white,)
+              color: Colors.white,
+            size: 20.sp,)
 
 
           ],
