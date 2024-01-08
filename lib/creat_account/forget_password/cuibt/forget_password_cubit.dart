@@ -9,6 +9,11 @@ final FirebaseAuth firebaseAuth =FirebaseAuth.instance ;
   void sendCodeChangeThePassword({
     required email
 }) {
-    firebaseAuth.sendPasswordResetEmail(email: email);
+    firebaseAuth.sendPasswordResetEmail(email: email).then((value){
+      emit(ForgetPasswordSendEmailSuccess());
+    }).catchError((error){
+      emit(ForgetPasswordSendEmailFailure(errorMessage: error.toString()));
+    });
+
   }
 }

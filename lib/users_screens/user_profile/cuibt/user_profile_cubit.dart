@@ -9,18 +9,17 @@ class UserProfileCubit extends Cubit<UserProfileStates> {
 
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance ;
   final FirebaseFirestore firestore = FirebaseFirestore.instance ;
-  Map<String , dynamic> data = {} ;
+  Map<String , dynamic> data = {};
 
 
-   void getDataFromFireStore() {
+   void getDataFromFireStore() async {
     String userId = firebaseAuth.currentUser!.uid;
-     firestore.collection("userData").doc(userId).snapshots().listen((value) {
-      emit(UserProfileSuccessState());
-      data = value.data()! ;
-      print("data is ============$data");
-    }).onError((error){
-      UserProfileFailureState(errorMessage: error.toString());
-    });
+      firestore.collection("userData").doc(userId).snapshots().listen((value) {
+       data = value.data()! ;
+       emit(GetUserDataFromFireStoreSuccessState());
+     }).onError(
+          (error){emit(GetUserDateFromFireStoreFailureState(errorMessage: error.toString()));}
+     );
   }
 
 }

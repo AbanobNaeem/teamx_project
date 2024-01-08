@@ -21,23 +21,35 @@ class HomeScreenCubit extends Cubit<HomeScreenStates> {
       }
       emit(HomeScreenSuccessState());
     }).onError((error) {
-      HomeScreenFailureState(errorMessage: error.toString());
+       emit(HomeScreenFailureState(errorMessage: error.toString()));
     });
   }
-
 
   void getUserDataFromFireStore() {
     String userId = firebaseAuth.currentUser!.uid;
-    firestore.collection("userData").doc(userId).snapshots().listen((value) {
-        emit(UpdateUiSuccessState());
-        print("data is =====================${value.data()}");
-        data  = value.data()! ;
-        print('data 2 is =============$data');
-    }).onError((error){
-      UpdateUiFailureState(errorMessage: error.toString());
-    });
+    firestore.collection("userData").doc(userId).snapshots().listen(
+          (value) {
+        if (value.exists) {
+          emit(UpdateUiSuccessState());
+          Map<String, dynamic>? userData = value.data();
+          if (userData != null) {
+            // Handle the non-null case
+            data = userData;
+          } else {
+            // Handle the case when data is null
+            emit(UpdateUiFailureState(errorMessage: 'User data is null.'));
+          }
+        } else {
+          // Handle the case when the document doesn't exist
+          emit(UpdateUiFailureState(errorMessage: 'Document does not exist.'));
+        }
+      },
+      onError: (error) {
+        emit(UpdateUiFailureState(errorMessage: error.toString()));
+      },
+    );
   }
-  
+
 
 
 }

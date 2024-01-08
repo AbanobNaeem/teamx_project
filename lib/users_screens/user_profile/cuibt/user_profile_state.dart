@@ -5,9 +5,9 @@ abstract class UserProfileStates {}
 
 class UserProfileInitialState extends UserProfileStates {}
 
-class UserProfileSuccessState extends UserProfileStates {}
+class GetUserDataFromFireStoreSuccessState extends UserProfileStates {}
 
-class UserProfileFailureState extends UserProfileStates {
+class GetUserDateFromFireStoreFailureState extends UserProfileStates {
   final String errorMessage ;
-  UserProfileFailureState({required this.errorMessage});
+  GetUserDateFromFireStoreFailureState({required this.errorMessage});
 }

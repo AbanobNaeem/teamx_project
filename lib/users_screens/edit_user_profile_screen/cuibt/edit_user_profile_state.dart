@@ -5,10 +5,32 @@ abstract class EditUserProfileStates {}
 
 class EditUserProfileInitialState extends EditUserProfileStates {}
 
-class EditUserProfileSuccessState extends EditUserProfileStates {}
+class GetDataFromFireStoreSuccessState extends EditUserProfileStates {}
 
-class EditUserProfileFailureState extends EditUserProfileStates {
+class GetDataFromFireStoreFailureState extends EditUserProfileStates {
   final String errorMessage ;
-  EditUserProfileFailureState({required this.errorMessage});
+  GetDataFromFireStoreFailureState({required this.errorMessage});
 
 }
+
+
+class UpdateUserDataSuccessState extends EditUserProfileStates{}
+
+class UpdateUserDataFailureState extends EditUserProfileStates {
+  final String errorMessage ;
+  UpdateUserDataFailureState(this.errorMessage);
+
+
+}
+class UpdateUserImageSuccessState extends EditUserProfileStates{}
+
+class UpdateUserImageFailureState extends EditUserProfileStates {
+  final String errorMessage ;
+  UpdateUserImageFailureState(this.errorMessage);
+
+
+}
+
+
+
+

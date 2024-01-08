@@ -1,22 +1,23 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:teamx_project/register/cubit/register_states.dart';
+import 'package:teamx_project/creat_account/register/cubit/register_states.dart';
 
 class RegisterCubit extends Cubit<RegisterStates>{
   RegisterCubit() : super(RegisterInitialState());
- final FirebaseAuth firebaseAuth = FirebaseAuth.instance ;
- final FirebaseFirestore firestore = FirebaseFirestore.instance ;
+  final FirebaseAuth firebaseAuth = FirebaseAuth.instance ;
+  final FirebaseFirestore firestore = FirebaseFirestore.instance ;
   void register({
     required email ,
     required password
-})
+  })
   {
 
     firebaseAuth
         .createUserWithEmailAndPassword(email: email, password: password)
         .then((value) {
-      emit(RegisterSuccessState());
+          firebaseAuth.signOut() ;
+          emit(RegisterSuccessState());
     }).catchError((error) {
       emit(RegisterFailureState(errorMessage: error.toString()));
     });
@@ -27,8 +28,8 @@ class RegisterCubit extends Cubit<RegisterStates>{
     required password,
     required phone ,
     required firstName,
-    required lastName
-}) {
+    required lastName,
+  }) {
     String userId = firebaseAuth.currentUser!.uid;
     Map<String, dynamic> data = {
       "id": userId,

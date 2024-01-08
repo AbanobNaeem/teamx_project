@@ -4,8 +4,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:teamx_project/creat_account/login/screen/login_screen.dart';
 import 'package:teamx_project/home_screen/screen/home_screen.dart';
-import 'package:teamx_project/login/screen/login_screen.dart';
+
 
 
 
@@ -27,9 +28,9 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return   ResponsiveSizer(builder: (p0, p1, p2) {
 
-     return MaterialApp(
+    return   ResponsiveSizer(builder: (p0, p1, p2) {
+      return MaterialApp(
           debugShowCheckedModeBanner: false,
           home: firebaseAuth.currentUser == null ? LoginScreen() : HomeScreen()
         //  home: AddDataInDataBase()
@@ -41,4 +42,4 @@ class MyApp extends StatelessWidget {
 
   }
 
-  }
+}
